@@ -1,6 +1,6 @@
 # react-bootstrap-theme-switcher
 
-A React component for dynamically switching between Bootstrap (Bootswatch) themes.
+A React component for dynamically switching between Bootstrap and [Bootswatch](https://bootswatch.com/) themes.
 
 ### Install
 ```
@@ -83,6 +83,8 @@ export default {
 
 
 You can use the versions provided by the theme switcher from 'node_modules/react-bootstrap-theme-switcher/themes' or you generate your own and pass the root directory to the theme switcher. However, the structure and file naming must exactly match what is provided in the distribution.
+
+**NOTE:**Do NOT load the default Bootstrap theme as you might normally do with webpack (require('node_modules/.../bootstrap')) because the ```ThemeSwitcher``` looks for specifically named stylesheet links when removing the current theme. Let the ThemeSwitcher load the default theme at startup.
 
 ### Auto reload last theme used
 
