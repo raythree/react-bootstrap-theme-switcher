@@ -38,12 +38,13 @@ Any of your other components can use the ```ThemeChooser``` component to let the
 
 ### Theme files
 
-For convenience the theme switcher comes bundled with the [Bootswatch](https://bootswatch.com/) themes and a copy of [Bootstrap 3.3.7](http://getbootstrap.com/) located in the themes folder. These files MUST be copied to your distribution folder of your Web server. The structure is:
+For convenience the theme switcher comes bundled with the [Bootswatch](https://bootswatch.com/) themes, a copy of [Bootstrap 3.3.7](http://getbootstrap.com/), and [JQuery 3.1.0](https://jquery.com/) located in the themes folder. These files MUST be copied to your distribution folder of your Web server. The structure is:
 
 ```
 themes
   /js
-    bootstrap.min.js 
+    jquery.min.js
+    bootstrap.min.js
   /fonts
     ...bootstrap Glyphicon fonts
   /default
@@ -90,7 +91,7 @@ export default {
 
 You can use the versions provided by the theme switcher from ```node_modules/react-bootstrap-theme-switcher/themes``` or you generate your own and pass the root directory to the theme switcher. However, the structure and file naming must exactly match what is provided in the distribution. Instructions on downloading/customizing Bootswatch themes can be [found here](https://github.com/thomaspark/bootswatch).
 
-**NOTE:** Do NOT load the default Bootstrap theme as you might normally do with webpack (require('node_modules/.../bootstrap')) because the ```ThemeSwitcher``` looks for specifically named stylesheet links when removing the current theme. Let the ThemeSwitcher load the default theme at startup.
+**NOTE:** Do NOT load the default Bootstrap theme or JQuery as you might normally do with webpack, e.g. ```require('node_modules/.../bootstrap')```, because the ```ThemeSwitcher``` looks for specifically named stylesheet links when removing the current theme. Let the ThemeSwitcher load both Bootstrap and JQuery at startup.
 
 ### Auto reload last theme used
 
