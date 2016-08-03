@@ -36,7 +36,7 @@ render(
 
 Any of your other components can use the ```ThemeChooser``` component to let the user select a theme. The ```ThemeChooser``` gets passed a reference to the ```ThemeSwitcher``` via the ```React Context``` mechanism, so it can trigger a re-render and not display the children components during theme unloading and reloading.
 
-### Theme files
+### Theme files (and required Bootstrap and JQuery javascript)
 
 For convenience the theme switcher comes bundled with the [Bootswatch](https://bootswatch.com/) themes, a copy of [Bootstrap 3.3.7](http://getbootstrap.com/), and [JQuery 3.1.0](https://jquery.com/) located in the themes folder. These files MUST be copied to your distribution folder of your Web server. The structure is:
 
