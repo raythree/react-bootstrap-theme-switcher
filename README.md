@@ -9,10 +9,8 @@ npm install react-bootstrap-theme-switcher
 ### Setup
 The theme switcher works by dynamically modifying the main document's stylesheet link elements between the default Bootstrap theme or one of the selected Bootswatch themes. There are two components:
 
- * A themeService used by your App to load themes
- * A ThemeChooser component that displays a select menu allowing the user to choose a theme.
-
-
+ 1. A themeService used by your App to load themes
+ 2. A ThemeChooser component that displays a select menu allowing the user to choose a theme.
 
  For convenience the theme switcher comes bundled with the Bootswatch themes and a copy of Bootstrap 3.3.x located in the themes folder. These files MUST be copied to your distribution folder of your Web server, for example if using Webpack you can use the Copy Webpack Plugin to copy the files. You can use the versions provided by the theme switcher from 'node_modules/react-bootstrap-theme-switcher/themes' or you generate your own and pass the root directory to the theme switcher. The structure of this this folder must be setup exactly as provided in the distribution:
 
@@ -21,7 +19,7 @@ themes
   /fonts
     ...bootstrap Glyphicon fonts
   /default
-    (these two files are the default bootstrap files)
+    (these two files are the default bootstrap theme)
     bootstrap.min.css
     bootstrap-theme.min.css
   /yeti
