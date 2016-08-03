@@ -6,6 +6,8 @@ A React component for dynamically switching between Bootstrap and [Bootswatch](h
 
 [Code for demo here](https://github.com/raythree/react-bootstrap-theme-switcher)
 
+The [LazyLoader](https://github.com/LukasBombach/Lazyloader) is used to dynamically load stylesheets and re-render after they have been loaded.
+
 ### Install
 ```
 npm install react-bootstrap-theme-switcher
@@ -53,7 +55,7 @@ themes
   other themes    
 ```
 
-The theme switcher will add and remove themes by adding links to the document. For example, if you configure it to locate the themes in '/themes' it will generate links like:
+The theme switcher will add and remove themes by adding and deleting links to the document. For example, if you configure it to locate the themes in '/themes' it will generate links like:
 
 ```
 <link rel="stylesheet" type="text/css" href="/themes/default/bootstrap.min.css"
