@@ -10,6 +10,7 @@ function capitalize(s) {
 class ThemeChooser extends React.Component {
   constructor(props) {
     super(props);
+    this.onSelect = this.onSelect.bind(this);
   }
 
   onSelect(e) {
