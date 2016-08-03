@@ -36,7 +36,7 @@ Any of your other components can use the ThemeChooser component to let the user 
 
 ### Theme files
 
-For convenience the theme switcher comes bundled with the Bootswatch themes and a copy of Bootstrap 3.3.x located in the themes folder. These files MUST be copied to your distribution folder of your Web server, for example if using Webpack you can use the Copy Webpack Plugin to copy the files:
+For convenience the theme switcher comes bundled with the Bootswatch themes and a copy of Bootstrap 3.3.x located in the themes folder. These files MUST be copied to your distribution folder of your Web server. The structure is:
 
 ```
 themes
@@ -68,7 +68,7 @@ for the default bootstrap theme, or:
 
 for any of the other themes.
 
-Here is a sample Webpack config that uses the [CopyWebpackPlugin](https://github.com/kevlened/copy-webpack-plugin) to copy the theme files provided with the component to the distribution:
+Here is a sample Webpack config that uses the [CopyWebpackPlugin](https://github.com/kevlened/copy-webpack-plugin) to copy the theme files provided with the distribution into your bundle:
 
 ```javascript
 import CopyWebpackPlugin from 'copy-webpack-plugin';
