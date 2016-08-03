@@ -47,7 +47,7 @@ class ThemeChooser extends React.Component {
             //var active = (theme === currentTheme ? 'active' : '');
             var active = '';
             return <li key={theme} className={active}>
-              <a href="#" data-theme={theme} onClick={this.doCallback}>{capitalize(theme)}</a>
+              <a href="#" data-theme={theme}>{capitalize(theme)}</a>
             </li>
           })}
         </ul>

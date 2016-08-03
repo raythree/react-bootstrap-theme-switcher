@@ -42,6 +42,8 @@ For convenience the theme switcher comes bundled with the [Bootswatch](https://b
 
 ```
 themes
+  /js
+    bootstrap.min.js 
   /fonts
     ...bootstrap Glyphicon fonts
   /default
