@@ -9,8 +9,8 @@ npm install react-bootstrap-theme-switcher
 ### Setup
 The theme switcher works by dynamically modifying the document's stylesheet link elements to switch between the default Bootstrap theme or one of the selected Bootswatch themes. There are two components:
 
- * A ThemeSwitcher element that wraps your top-level component
- * A ThemeChooser component that displays a select menu allowing the user to choose a theme.
+ * A ```ThemeSwitcher``` component that wraps your top-level component
+ * A ```ThemeChooser``` component that displays a select menu allowing the user to choose a theme.
 
 The ThemeSwitcher will make sure your app is not displayed until the selected theme is loaded, and will also hide it whenever the ThemeChooser selects a new theme. Here is an example of an app that uses the Redux Provider and React Router rendered in index.js:
 
@@ -26,7 +26,7 @@ render(
     </Provider>, document.getElementById('app')
 );
 ```
-**NOTE:** You can wrap any top level component in the ThemeSwitcher *except* for ```Provider``` (Router or any other component is fine).
+**NOTE:** You can wrap any top level component with the ```ThemeSwitcher``` *except* for ```Provider``` (Router or any other component is fine).
 
 Any of your other components can use the ThemeChooser component to let the user select a theme. The ThemeChooser gets passed a reference to the ThemeSwitcher via the React Context mechanism, so it can trigger a re-render and not display the children components during theme unloading and reloading.
 
@@ -69,7 +69,6 @@ Here is a sample Webpack config that uses the [CopyWebpackPlugin](https://github
 ```javascript
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 
-...
 export default {
   ...
   plugins: [
@@ -84,7 +83,7 @@ export default {
 
 You can use the versions provided by the theme switcher from 'node_modules/react-bootstrap-theme-switcher/themes' or you generate your own and pass the root directory to the theme switcher. However, the structure and file naming must exactly match what is provided in the distribution.
 
-**NOTE:**Do NOT load the default Bootstrap theme as you might normally do with webpack (require('node_modules/.../bootstrap')) because the ```ThemeSwitcher``` looks for specifically named stylesheet links when removing the current theme. Let the ThemeSwitcher load the default theme at startup.
+**NOTE:** Do NOT load the default Bootstrap theme as you might normally do with webpack (require('node_modules/.../bootstrap')) because the ```ThemeSwitcher``` looks for specifically named stylesheet links when removing the current theme. Let the ThemeSwitcher load the default theme at startup.
 
 ### Auto reload last theme used
 
