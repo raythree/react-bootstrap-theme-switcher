@@ -7,21 +7,34 @@ function capitalize(s) {
   return s.charAt(0).toUpperCase() + s.substring(1);
 }
 
+const log = {
+  debug(msg) {
+    console.log('ThemeChooser: ' + msg);
+  }
+}
+
 class ThemeChooser extends React.Component {
   constructor(props) {
     super(props);
     this.onSelect = this.onSelect.bind(this);
+    this.doCallback = this.doCallback.bind(this);
+  }
+
+  doCallback() {
   }
 
   onSelect(e) {
     e.preventDefault();
+    /*
     let chosenTheme = e.target.getAttribute('data-theme')
     if (chosenTheme !== currentTheme) {
       themeSelected(chosenTheme);
     }
+    */
   }
 
   render() {
+    log.debug('themeChooser is ' + this.context.themeSwitcher);
     const menu =
       <div className="dropdown dropdown-menu-right">
         <button className="btn btn-default dropdown-toggle" type="button" id="theme-menu"
@@ -31,9 +44,10 @@ class ThemeChooser extends React.Component {
         </button>
         <ul className="dropdown-menu">
           {themes.map((theme) => {
-            var active = (theme === currentTheme ? 'active' : '');
+            //var active = (theme === currentTheme ? 'active' : '');
+            var active = '';
             return <li key={theme} className={active}>
-              <a href="#" data-theme={theme} onClick={doCallback}>{capitalize(theme)}</a>
+              <a href="#" data-theme={theme} onClick={this.doCallback}>{capitalize(theme)}</a>
             </li>
           })}
         </ul>
@@ -41,7 +55,10 @@ class ThemeChooser extends React.Component {
 
     return menu;
   }
-
 }
 
-export default ThemeChooser;
+ThemeChooser.contextTypes = {
+  themeSwitcher: React.PropTypes.object
+};
+
+export { ThemeChooser };

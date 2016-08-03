@@ -7,12 +7,32 @@ A React component for dynamically switching between Bootstrap (Bootswatch) theme
 npm install react-bootstrap-theme-switcher
 ```
 ### Setup
-The theme switcher works by dynamically modifying the main document's stylesheet link elements between the default Bootstrap theme or one of the selected Bootswatch themes. There are two components:
+The theme switcher works by dynamically modifying the document's stylesheet link elements to switch between the default Bootstrap theme or one of the selected Bootswatch themes. There are two components:
 
- * A themeService used by your App to load themes
+ * A ThemeSwitcher element that wraps your top-level component
  * A ThemeChooser component that displays a select menu allowing the user to choose a theme.
 
-For convenience the theme switcher comes bundled with the Bootswatch themes and a copy of Bootstrap 3.3.x located in the themes folder. These files MUST be copied to your distribution folder of your Web server, for example if using Webpack you can use the Copy Webpack Plugin to copy the files. You can use the versions provided by the theme switcher from 'node_modules/react-bootstrap-theme-switcher/themes' or you generate your own and pass the root directory to the theme switcher. The structure of this this folder must be setup exactly as provided in the distribution:
+The ThemeSwitcher will make sure your app is not displayed until the selected theme is loaded, and will also hide it whenever the ThemeChooser selects a new theme. Here is an example of an app that uses the Redux Provider and React Router rendered in index.js:
+
+```javascript
+const store = configureStore();
+const history = syncHistoryWithStore(browserHistory, store);
+
+render(
+    <Provider store={store}>
+      <ThemeSwitcher themePath="/themes" defaultTheme="yeti">
+        <Router history={history} routes={routes} />
+      </ThemeSwitcher>
+    </Provider>, document.getElementById('app')
+);
+```
+**NOTE:** You can wrap any top level component in the ThemeSwitcher *except* for ```Provider``` (Router or any other component is fine).
+
+Any of your other components can use the ThemeChooser component to let the user select a theme. The ThemeChooser gets passed a reference to the ThemeSwitcher via the React Context mechanism, so it can trigger a re-render and not display the children components during theme unloading and reloading.
+
+### Theme files
+
+For convenience the theme switcher comes bundled with the Bootswatch themes and a copy of Bootstrap 3.3.x located in the themes folder. These files MUST be copied to your distribution folder of your Web server, for example if using Webpack you can use the Copy Webpack Plugin to copy the files:
 
 ```
 themes
@@ -44,9 +64,7 @@ for the default bootstrap theme, or:
 
 for any of the other themes.
 
-If you want the last theme used to be automatically loaded in the future you can pass the themeService the name of a cookie to use and it will save the last loaded theme and reload it next time when told to load without specifying a theme name.
-
-Here is a sample Webpack config that uses the CopyWebpackPlugin to copy the theme files provided with the component to the ditribution:
+Here is a sample Webpack config that uses the [CopyWebpackPlugin](https://github.com/kevlened/copy-webpack-plugin) to copy the theme files provided with the component to the distribution:
 
 ```javascript
 import CopyWebpackPlugin from 'copy-webpack-plugin';
@@ -62,60 +80,18 @@ export default {
     ),
   ...  
 ```
-### Using the themeService
 
-The themeService provides a ```load``` method to load either a specified or default theme (or the last theme saved in a cookie)
-Your App should import the themeService and configure it as follows:
+
+You can use the versions provided by the theme switcher from 'node_modules/react-bootstrap-theme-switcher/themes' or you generate your own and pass the root directory to the theme switcher. However, the structure and file naming must exactly match what is provided in the distribution.
+
+### Auto reload last theme used
+
+If you want the last theme used to be automatically loaded in the future you can provide the ThemeSwitcher with the name of a localStorage key to use to save the theme name:
 
 ```javascript
-import { themeService, ThemeChooser } from 'react-bootstrap-theme-switcher';
-
-
-class App extends React.Component {
-
-  constructor(props) {
-    super(props);
-    themeService.configure({
-      themeDir: '/themes'
-      defaultTheme: 'default'
-      themeCookie: 'theme'
-    });
-
-    this.state={themeLoaded: false}; // don't render until theme loaded
-    this.onThemeLoading = this.onLoading.bind(this);
-    this.onThemeLoaded = this.onLoaded.bind(this);
-
-    themeService.onLoading(this.onThemeLoading);
-    themeService.onLoaded(this.onThemeLoaded);
-  }  
-
-  componentDidMount() {
-    themeService.load(); // load default or last theme
-  }
-
-  onThemeLoading() {
-    this.setState({themeLoaded: false});
-  }
-
-  onThemeLoaded() {
-    this.setState({themeLoaded: true});
-  }
-
-  render() {
-    if (!this.state.themeLoaded) return null;
-
-    let app =
-      <App ...>
-        <div>
-          <ThemeChooser themeService={themeService} />
-          ....
-        </div>  
-      </App>    
-
-    return app
-  }
+<ThemeSwitcher defaultTheme="yeti" themePath="/themes" storeThemeKey="theme" />
 ```
-The ThemeChooser component is passed the instance of the themeService and will automatically call it's ```load``` method when a theme is selected. In order to avoid displaying unstyled content your App should respond to the onLoaded and onLoading callbacks by setting it's state accordingly.
+This way, if no theme is currently loaded 'yeti' will be used, but if the user selects another theme it's name will be saved in localStorage under the ```theme``` key and used in the future until it is changed again.
 
 [A demo is here](http://bst.ray3.io)
 
