@@ -6,7 +6,7 @@ A React component for dynamically switching between Bootstrap and [Bootswatch](h
 
 [Code for demo here](https://github.com/raythree/react-bootstrap-theme-switcher)
 
-**NOTE:** [LazyLoader](https://github.com/LukasBombach/Lazyloader) is used to dynamically load stylesheets and re-render after they have been loaded. The theme switcher requires Bootstrap themes and JQuery, and will automatically load either load the versions provided with this distribution or any versions that you choose. See below for setup instructions for configuring the required files.
+**NOTE:** [LazyLoader](https://github.com/LukasBombach/Lazyloader) is used to dynamically load stylesheets and re-render after they have been loaded. The theme switcher requires Bootstrap themes and JQuery. Do not load these files either via Webpack or via links in your index.html. Configure the file structure described below (or use the versions included) and the ```ThemeSwitcher``` will automatically load them as needed.
 
 ### Install
 ```
