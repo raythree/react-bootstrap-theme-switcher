@@ -46,6 +46,22 @@ for any of the other themes.
 
 When a theme is chosen and loaded, the themeService will save a cookie (named theme by default) so that the theme will be automatically loaded in the future.
 
+Here is a sample Webpack config that uses the CopyWebpackPlugin to copy the theme files provided with the component to the ditribution:
+
+```javascript
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+
+...
+export default {
+  ...
+  plugins: [
+    new CopyWebpackPlugin([
+        {context: 'node_modules/react-bootstrap-theme-switcher/themes/', from: '**/*', to: 'themes/'}
+      ],
+      {copyUnmodified: true}
+    ),
+  ...  
+```
 ### Using the themeService
 
 The themeService provides a ```load``` method to load either a specified or default theme (or the last theme saved in a cookie)
