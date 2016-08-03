@@ -32,13 +32,13 @@ render(
     </Provider>, document.getElementById('app')
 );
 ```
-**NOTE:** You can wrap any top level component with the ```ThemeSwitcher``` *except* for ```Provider``` (Router or any other component is fine).
+**NOTE:** You can wrap any top level component with the ```ThemeSwitcher``` *except* for ```Provider``` (Router or any other component is fine). ```Provider``` is special, and you'll get a blank screen if you place it inside the ```ThemeSwitcher```.
 
-Any of your other components can use the ThemeChooser component to let the user select a theme. The ThemeChooser gets passed a reference to the ThemeSwitcher via the React Context mechanism, so it can trigger a re-render and not display the children components during theme unloading and reloading.
+Any of your other components can use the ```ThemeChooser``` component to let the user select a theme. The ```ThemeChooser``` gets passed a reference to the ```ThemeSwitcher``` via the ```React Context``` mechanism, so it can trigger a re-render and not display the children components during theme unloading and reloading.
 
 ### Theme files
 
-For convenience the theme switcher comes bundled with the Bootswatch themes and a copy of Bootstrap 3.3.x located in the themes folder. These files MUST be copied to your distribution folder of your Web server. The structure is:
+For convenience the theme switcher comes bundled with the [Bootswatch](https://bootswatch.com/) themes and a copy of [Bootstrap 3.3.7](http://getbootstrap.com/) located in the themes folder. These files MUST be copied to your distribution folder of your Web server. The structure is:
 
 ```
 themes
@@ -86,8 +86,7 @@ export default {
   ...  
 ```
 
-
-You can use the versions provided by the theme switcher from 'node_modules/react-bootstrap-theme-switcher/themes' or you generate your own and pass the root directory to the theme switcher. However, the structure and file naming must exactly match what is provided in the distribution.
+You can use the versions provided by the theme switcher from ```node_modules/react-bootstrap-theme-switcher/themes``` or you generate your own and pass the root directory to the theme switcher. However, the structure and file naming must exactly match what is provided in the distribution. Instructions on downloading/customizing Bootswatch themes can be [found here](https://github.com/thomaspark/bootswatch).
 
 **NOTE:** Do NOT load the default Bootstrap theme as you might normally do with webpack (require('node_modules/.../bootstrap')) because the ```ThemeSwitcher``` looks for specifically named stylesheet links when removing the current theme. Let the ThemeSwitcher load the default theme at startup.
 
