@@ -2,6 +2,10 @@
 
 A React component for dynamically switching between Bootstrap and [Bootswatch](https://bootswatch.com/) themes.
 
+[A live demo is here](http://bst.ray3.io)
+
+[Code for demo here](https://github.com/raythree/react-bootstrap-theme-switcher)
+
 ### Install
 ```
 npm install react-bootstrap-theme-switcher
@@ -9,7 +13,7 @@ npm install react-bootstrap-theme-switcher
 ### Setup
 The theme switcher works by dynamically modifying the document's stylesheet link elements to switch between the default Bootstrap theme or one of the selected Bootswatch themes. There are two components:
 
- * A ```ThemeSwitcher``` component that wraps your top-level component
+ * A ```ThemeSwitcher``` component that wraps your top-level component. This is responsible for theme loading and hiding your app during the load.
  * A ```ThemeChooser``` component that displays a select menu allowing the user to choose a theme.
 
 The ThemeSwitcher will make sure your app is not displayed until the selected theme is loaded, and will also hide it whenever the ThemeChooser selects a new theme. Here is an example of an app that uses the Redux Provider and React Router rendered in index.js:
@@ -93,7 +97,3 @@ If you want the last theme used to be automatically loaded in the future you can
 <ThemeSwitcher defaultTheme="yeti" themePath="/themes" storeThemeKey="theme" />
 ```
 This way, if no theme is currently loaded 'yeti' will be used, but if the user selects another theme it's name will be saved in localStorage under the ```theme``` key and used in the future until it is changed again.
-
-[A demo is here](http://bst.ray3.io)
-
-[Code for demo here](https://github.com/raythree/reactjs-bootstrap-table-demo)
