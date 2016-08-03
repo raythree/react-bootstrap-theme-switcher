@@ -7,6 +7,22 @@ const log = {
   }
 }
 
+// check if boootstrap and jquery javascript files are loaded
+function isJsLoaded() {
+  log.debug('checking for js loaded');
+  const head = document.getElementsByTagName('head')[0];
+  const nodes = head.childNodes;
+  let loaded = false;
+  for (let ix = 0; ix < nodes.length; ix++) {
+    let node = nodes.item(ix);
+    if (node.href && node.href.indexOf('jquery.min.js') > -1) {
+      loaded = true;
+      log.debug('js is loaded')
+    }
+  }
+  return loaded;
+}
+
 function removeCurrentTheme() {
   const head = document.getElementsByTagName('head')[0];
   const nodes = head.childNodes;
@@ -26,16 +42,26 @@ class ThemeSwitcher extends React.Component {
   constructor(props) {
     super(props);
     this.load = this.load.bind(this);
+    this.loadDefault = this.loadDefault.bind(this);
+
     this.state = {loaded: false};
   }
 
   componentDidMount() {
     // load bootstrap javascript just at first mount
-    Lazyloader.load('/themes/js/jquery.min.js', function () {
-      log.debug('jquery loaded');
-      Lazyloader.load('/themes/js/bootstrap.min.js', function () {
-        log.debug('bootstrap js loaded');
-        this.load();
+    if (!isJsLoaded()) {
+      Lazyloader.load('/themes/js/jquery.min.js', function () {
+        Lazyloader.load('/themes/js/bootstrap.min.js', function () {
+          this.loadDefault(); // load default theme
+        }.bind(this));
+      }.bind(this));
+    }
+  }
+
+  loadDefault() {
+    Lazyloader.load('/themes/default/bootstrap.min.css', function () {
+      Lazyloader.load('/themes/default/bootstrap-theme.min.css', function () {
+        this.setState({loaded: true});
       }.bind(this));
     }.bind(this));
   }
@@ -54,6 +80,7 @@ class ThemeSwitcher extends React.Component {
   }
 
   render() {
+    if (!this.state.loaded) return null;
     return this.props.children || <span/>
   }
 }

@@ -34,7 +34,6 @@ class ThemeChooser extends React.Component {
   }
 
   render() {
-    log.debug('themeChooser is ' + this.context.themeSwitcher);
     const menu =
       <div className="dropdown dropdown-menu-right">
         <button className="btn btn-default dropdown-toggle" type="button" id="theme-menu"
