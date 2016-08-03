@@ -44,7 +44,7 @@ for the default bootstrap theme, or:
 
 for any of the other themes.
 
-When a theme is chosen and loaded, the themeService will save a cookie (named theme by default) so that the theme will be automatically loaded in the future.
+If you want the last theme used to be automatically loaded in the future you can pass the themeService the name of a cookie to use and it will save the last loaded theme and reload it next time when told to load without specifying a theme name.
 
 Here is a sample Webpack config that uses the CopyWebpackPlugin to copy the theme files provided with the component to the ditribution:
 
@@ -75,12 +75,12 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    // these are all the defaults, you only need to call configure if using other values
     themeService.configure({
       themeDir: '/themes'
       defaultTheme: 'default'
       themeCookie: 'theme'
     });
+
     this.state={themeLoaded: false}; // don't render until theme loaded
     this.onThemeLoading = this.onLoading.bind(this);
     this.onThemeLoaded = this.onLoaded.bind(this);
