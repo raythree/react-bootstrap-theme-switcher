@@ -1,3 +1,6 @@
+### [1.0.5]
+* Fixed themePath property.
+
 ### [1.0.4]
 * Added style prop to ThemeChooser and fixed themePath not being used for jquery.
 

@@ -59,7 +59,8 @@ class ThemeSwitcher extends React.Component {
     this.load = this.load.bind(this);
     this.loadDefault = this.loadDefault.bind(this);
 
-    this.themePath = this.props.themePath || '/themes/';
+    console.log('props themepath: ' + props.themePath)
+    this.themePath = props.themePath || '/themes/';
     if (this.themePath.charAt(this.themePath.length - 1) !== '/') {
       this.themePath = this.themePath + '/';
     }
@@ -69,6 +70,7 @@ class ThemeSwitcher extends React.Component {
   componentDidMount() {
     // load bootstrap javascript just at first mount
     if (!isJsLoaded()) {
+      console.log('LOADING JQUERY via ' + this.themePath);
       Lazyloader.load(this.themePath + 'js/jquery.min.js', function () {
         Lazyloader.load(this.themePath + 'js/bootstrap.min.js', function () {
           this.load(); // load default theme
