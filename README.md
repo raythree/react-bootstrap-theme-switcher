@@ -35,7 +35,7 @@ render(
 ```
 **NOTE:** You can wrap any top level component with the ```ThemeSwitcher``` *except* for ```Provider``` (Router or any other component is fine). ```Provider``` is special, and you'll get a blank screen if you place it inside the ```ThemeSwitcher```.
 
-Any of your other components can use the ```ThemeChooser``` component to let the user select a theme. The ```ThemeChooser``` gets passed a reference to the ```ThemeSwitcher``` via the ```React Context``` mechanism, so it can trigger a re-render and not display the children components during theme unloading and reloading.
+To let users swich themes add the ```ThemeChooser``` to one of your pages (e.g. a Settings page). The ```ThemeChooser``` gets passed a reference to the ```ThemeSwitcher``` via the ```React Context``` mechanism, so it can trigger a re-render and not display the children components during theme unloading and reloading.
 
 ###ThemeSwitcher props
 * ```themePath``` - location of theme files on server (default '/themes')
