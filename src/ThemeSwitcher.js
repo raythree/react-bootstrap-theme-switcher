@@ -1,12 +1,6 @@
 import React from 'react';
 import Lazyloader from './lazyloader';
 
-const log = {
-  debug(msg) {
-    console.log('ThemeSwitcher: ' + msg);
-  }
-}
-
 function setItem(key, obj) {
   if (!key) return null;
   try {
@@ -30,7 +24,6 @@ function getItem(key) {
 
 // check if boootstrap and jquery javascript files are loaded
 function isJsLoaded() {
-  log.debug('checking for js loaded');
   const head = document.getElementsByTagName('head')[0];
   const nodes = head.childNodes;
   let loaded = false;
@@ -38,7 +31,6 @@ function isJsLoaded() {
     let node = nodes.item(ix);
     if (node.href && node.href.indexOf('jquery.min.js') > -1) {
       loaded = true;
-      log.debug('js is loaded')
     }
   }
   return loaded;
@@ -52,11 +44,9 @@ function removeCurrentTheme() {
   for (let ix = 0; ix < nodes.length; ix++) {
     let node = nodes.item(ix);
     if (node.href && node.href.indexOf('bootstrap') > -1) {
-      log.debug('REMOVE: ' + node.href);
       list.push(node)
     }
   }
-  if (!list.length) log.debug('NO bootstrap elements');
   list.forEach((node) => { head.removeChild(node) });
 }
 
@@ -70,11 +60,6 @@ class ThemeSwitcher extends React.Component {
     if (this.themePath.charAt(this.themePath.length - 1) !== '/') {
       this.themePath = this.themePath + '/';
     }
-
-    log.debug('using themePath: ' + this.themePath);
-    log.debug('using defaultTheme: ' + this.props.defaultTheme);
-    log.debug('using storeThemeKey: ' + this.props.storeThemeKey);
-
     this.state = {loaded: false};
   }
 
@@ -98,7 +83,6 @@ class ThemeSwitcher extends React.Component {
   }
 
   load(theme) {
-    log.debug('load invoked with theme: ' + theme);
     this.setState({loaded: false})
     removeCurrentTheme();
 
@@ -106,21 +90,15 @@ class ThemeSwitcher extends React.Component {
     if (!name) {
       // see if a theme was previously stored, will return null if storedThemeKey not set
       name = getItem(this.props.storeThemeKey);
-      if (name) log.debug('using last stored theme: ' + name);
     }
     if (!name) {
       name = this.props.defaultTheme;
-      log.debug("using default theme: " + name)
     }
-
     if (name === 'default') {
-      log.debug('loading default theme');
       return this.loadDefault();
     }
 
-    log.debug('loadng theme: ' + this.themePath + name);
     Lazyloader.load(this.themePath + name + '/bootstrap.min.css', function () {
-      log.debug('theme loaded ' + name);
       setItem(this.props.storeThemeKey, name);
       this.setState({loaded: true})
     }.bind(this));

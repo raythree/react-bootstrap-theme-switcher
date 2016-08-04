@@ -1,16 +1,11 @@
 import React from 'react';
 
 const themes = ['default', 'yeti', 'superhero', 'paper', 'lumen', 'darkly',
-                'simplex', 'cerulean', 'sandstone', 'slate'].sort();
+                'simplex', 'cerulean', 'sandstone', 'cosmo', 'cyborg', 'slate',
+                'flatly', 'journal', 'readable', 'spacelab', 'united'].sort();
 
 function capitalize(s) {
   return s.charAt(0).toUpperCase() + s.substring(1);
-}
-
-const log = {
-  debug(msg) {
-    console.log('ThemeChooser: ' + msg);
-  }
 }
 
 class ThemeChooser extends React.Component {
@@ -26,7 +21,6 @@ class ThemeChooser extends React.Component {
   onSelect(e) {
     e.preventDefault();
     let chosenTheme = e.target.getAttribute('data-theme');
-    log.debug('theme selected: ' + chosenTheme);
     this.context.themeSwitcher.load(chosenTheme);
   }
 
