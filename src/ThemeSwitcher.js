@@ -7,6 +7,27 @@ const log = {
   }
 }
 
+function setItem(key, obj) {
+  if (!key) return null;
+  try {
+    localStorage.setItem(key, JSON.stringify(obj));
+  }
+  catch (err) {
+    return null;
+  }
+}
+
+function getItem(key) {
+  if (!key) return null;
+  try {
+    var item = localStorage.getItem(key)
+    return item ? JSON.parse(item) : null;
+  }
+  catch (err) {
+    return null;
+  }
+}
+
 // check if boootstrap and jquery javascript files are loaded
 function isJsLoaded() {
   log.debug('checking for js loaded');
@@ -23,6 +44,7 @@ function isJsLoaded() {
   return loaded;
 }
 
+// remove any bootstrap links
 function removeCurrentTheme() {
   const head = document.getElementsByTagName('head')[0];
   const nodes = head.childNodes;
@@ -44,6 +66,15 @@ class ThemeSwitcher extends React.Component {
     this.load = this.load.bind(this);
     this.loadDefault = this.loadDefault.bind(this);
 
+    this.themePath = this.props.themePath || '/themes/';
+    if (this.themePath.charAt(this.themePath.length - 1) !== '/') {
+      this.themePath = this.themePath + '/';
+    }
+
+    log.debug('using themePath: ' + this.themePath);
+    log.debug('using defaultTheme: ' + this.props.defaultTheme);
+    log.debug('using storeThemeKey: ' + this.props.storeThemeKey);
+
     this.state = {loaded: false};
   }
 
@@ -52,29 +83,50 @@ class ThemeSwitcher extends React.Component {
     if (!isJsLoaded()) {
       Lazyloader.load('/themes/js/jquery.min.js', function () {
         Lazyloader.load('/themes/js/bootstrap.min.js', function () {
-          this.loadDefault(); // load default theme
+          this.load(); // load default theme
         }.bind(this));
       }.bind(this));
     }
   }
 
   loadDefault() {
-    Lazyloader.load('/themes/default/bootstrap.min.css', function () {
-      Lazyloader.load('/themes/default/bootstrap-theme.min.css', function () {
+    Lazyloader.load(this.themePath + 'default/bootstrap.min.css', function () {
+      Lazyloader.load(this.themePath + 'default/bootstrap-theme.min.css', function () {
         this.setState({loaded: true});
       }.bind(this));
     }.bind(this));
   }
 
   load(theme) {
+    log.debug('load invoked with theme: ' + theme);
     this.setState({loaded: false})
     removeCurrentTheme();
-    Lazyloader.load('/themes/yeti/bootstrap.min.css', function () {
+
+    let name = theme;
+    if (!name) {
+      // see if a theme was previously stored, will return null if storedThemeKey not set
+      name = getItem(this.props.storeThemeKey);
+      if (name) log.debug('using last stored theme: ' + name);
+    }
+    if (!name) {
+      name = this.props.defaultTheme;
+      log.debug("using default theme: " + name)
+    }
+
+    if (name === 'default') {
+      log.debug('loading default theme');
+      return this.loadDefault();
+    }
+
+    log.debug('loadng theme: ' + this.themePath + name);
+    Lazyloader.load(this.themePath + name + '/bootstrap.min.css', function () {
       log.debug('theme loaded ' + name);
+      setItem(this.props.storeThemeKey, name);
       this.setState({loaded: true})
     }.bind(this));
   }
 
+  // pass reference to this down to ThemeChooser component
   getChildContext() {
     return { themeSwitcher: this };
   }
@@ -87,6 +139,17 @@ class ThemeSwitcher extends React.Component {
 
 ThemeSwitcher.childContextTypes = {
   themeSwitcher: React.PropTypes.object
+};
+
+ThemeSwitcher.propTypes = {
+  themePath: React.PropTypes.string,
+  defaultTheme: React.PropTypes.string,
+  storeThemeKey: React.PropTypes.string
+};
+ThemeSwitcher.defaultProps = {
+  themePath: '/themes',
+  defaultTheme: 'default',
+  storeThemeKey: null
 };
 
 export { ThemeSwitcher };

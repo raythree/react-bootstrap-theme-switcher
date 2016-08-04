@@ -25,12 +25,9 @@ class ThemeChooser extends React.Component {
 
   onSelect(e) {
     e.preventDefault();
-    /*
-    let chosenTheme = e.target.getAttribute('data-theme')
-    if (chosenTheme !== currentTheme) {
-      themeSelected(chosenTheme);
-    }
-    */
+    let chosenTheme = e.target.getAttribute('data-theme');
+    log.debug('theme selected: ' + chosenTheme);
+    this.context.themeSwitcher.load(chosenTheme);
   }
 
   render() {
@@ -46,7 +43,7 @@ class ThemeChooser extends React.Component {
             //var active = (theme === currentTheme ? 'active' : '');
             var active = '';
             return <li key={theme} className={active}>
-              <a href="#" data-theme={theme}>{capitalize(theme)}</a>
+              <a href="#" data-theme={theme} onClick={this.onSelect}>{capitalize(theme)}</a>
             </li>
           })}
         </ul>
