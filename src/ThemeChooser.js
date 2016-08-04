@@ -28,13 +28,14 @@ class ThemeChooser extends React.Component {
   }
 
   render() {
+    let style = this.props.style || {};
     const menu =
-      <div className="dropdown dropdown-menu-right">
+      <div className="dropdown dropdown-menu-right" style={style}>
         <button className="btn btn-default dropdown-toggle" type="button" id="theme-menu"
                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
           Select Theme
           &nbsp;<span className="caret"></span>
-        </button>
+      </button>
         <ul className="dropdown-menu">
           {this.themes.map((theme) => {
             //var active = (theme === currentTheme ? 'active' : '');
