@@ -12,7 +12,7 @@ npm install react-bootstrap-theme-switcher
 The theme switcher works by dynamically modifying the document's stylesheet link elements to switch between the default Bootstrap theme or one of the selected Bootswatch themes. There are two components:
 
  * A ```ThemeSwitcher``` component that wraps your top-level component. This is responsible for theme loading and hiding your app during the load.
- * A ```ThemeChooser``` component that displays a select menu allowing the user to choose a theme.
+ * A ```ThemeChooser``` component that displays a dropdown button select menu allowing the user to choose a theme.
 
 The ThemeSwitcher will make sure your app is not displayed until the selected theme is loaded, and will also hide it whenever the ThemeChooser selects a new theme. Here is an example of an app that uses the Redux Provider and React Router rendered in index.js:
 
@@ -31,6 +31,12 @@ render(
 **NOTE:** You can wrap any top level component with the ```ThemeSwitcher``` *except* for ```Provider``` (Router or any other component is fine). ```Provider``` is special, and you'll get a blank screen if you place it inside the ```ThemeSwitcher```.
 
 Any of your other components can use the ```ThemeChooser``` component to let the user select a theme. The ```ThemeChooser``` gets passed a reference to the ```ThemeSwitcher``` via the ```React Context``` mechanism, so it can trigger a re-render and not display the children components during theme unloading and reloading.
+
+###THemeSwitcher props
+* ```themePath``` - location of theme files on server (default '/themes')
+* ```defaultTheme``` - default theme to use if user has not selected one (default ```'default'```, the Bootstrap theme)
+* ```storeThemeKey``` - name of localStorage key used to save the last theme (default ```null```)
+* ```themes``` - array of themes to display in the ```ThemeChooser``` (default is all Bootswatch themes)
 
 ### Theme files (and required Bootstrap and JQuery javascript)
 
