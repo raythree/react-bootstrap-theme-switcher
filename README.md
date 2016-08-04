@@ -32,7 +32,7 @@ render(
 
 Any of your other components can use the ```ThemeChooser``` component to let the user select a theme. The ```ThemeChooser``` gets passed a reference to the ```ThemeSwitcher``` via the ```React Context``` mechanism, so it can trigger a re-render and not display the children components during theme unloading and reloading.
 
-###THemeSwitcher props
+###ThemeSwitcher props
 * ```themePath``` - location of theme files on server (default '/themes')
 * ```defaultTheme``` - default theme to use if user has not selected one (default ```'default'```, the Bootstrap theme)
 * ```storeThemeKey``` - name of localStorage key used to save the last theme (default ```null```)
