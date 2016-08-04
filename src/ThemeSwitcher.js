@@ -50,6 +50,9 @@ function removeCurrentTheme() {
   list.forEach((node) => { head.removeChild(node) });
 }
 
+//------------------------------------------------------------------------------
+// Top level ThemeSwitcher Component
+//------------------------------------------------------------------------------
 class ThemeSwitcher extends React.Component {
   constructor(props) {
     super(props);
@@ -106,7 +109,10 @@ class ThemeSwitcher extends React.Component {
 
   // pass reference to this down to ThemeChooser component
   getChildContext() {
-    return { themeSwitcher: this };
+    return {
+      themeSwitcher: this,
+      themes: this.props.themes
+    };
   }
 
   render() {
@@ -116,18 +122,24 @@ class ThemeSwitcher extends React.Component {
 }
 
 ThemeSwitcher.childContextTypes = {
-  themeSwitcher: React.PropTypes.object
+  themeSwitcher: React.PropTypes.object,
+  themes: React.PropTypes.array
 };
 
 ThemeSwitcher.propTypes = {
   themePath: React.PropTypes.string,
   defaultTheme: React.PropTypes.string,
-  storeThemeKey: React.PropTypes.string
+  storeThemeKey: React.PropTypes.string,
+  themes: React.PropTypes.array
 };
+
 ThemeSwitcher.defaultProps = {
   themePath: '/themes',
   defaultTheme: 'default',
-  storeThemeKey: null
+  storeThemeKey: null,
+  themes: ['default', 'yeti', 'superhero', 'paper', 'lumen', 'darkly',
+           'simplex', 'cerulean', 'sandstone', 'cosmo', 'cyborg', 'slate',
+           'flatly', 'journal', 'readable', 'spacelab', 'united']
 };
 
 export { ThemeSwitcher };

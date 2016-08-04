@@ -1,18 +1,21 @@
 import React from 'react';
 
-const themes = ['default', 'yeti', 'superhero', 'paper', 'lumen', 'darkly',
-                'simplex', 'cerulean', 'sandstone', 'cosmo', 'cyborg', 'slate',
-                'flatly', 'journal', 'readable', 'spacelab', 'united'].sort();
-
 function capitalize(s) {
   return s.charAt(0).toUpperCase() + s.substring(1);
 }
 
 class ThemeChooser extends React.Component {
-  constructor(props) {
+  constructor(props, context) {
     super(props);
     this.onSelect = this.onSelect.bind(this);
     this.doCallback = this.doCallback.bind(this);
+
+    // get themes from context and sort them for display
+    this.themes = [];
+    context.themes.forEach(theme => {
+      this.themes.push(theme);
+    });
+    this.themes.sort();
   }
 
   doCallback() {
@@ -33,7 +36,7 @@ class ThemeChooser extends React.Component {
           &nbsp;<span className="caret"></span>
         </button>
         <ul className="dropdown-menu">
-          {themes.map((theme) => {
+          {this.themes.map((theme) => {
             //var active = (theme === currentTheme ? 'active' : '');
             var active = '';
             return <li key={theme} className={active}>
@@ -48,7 +51,8 @@ class ThemeChooser extends React.Component {
 }
 
 ThemeChooser.contextTypes = {
-  themeSwitcher: React.PropTypes.object
+  themeSwitcher: React.PropTypes.object,
+  themes: React.PropTypes.array
 };
 
 export { ThemeChooser };

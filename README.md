@@ -99,3 +99,19 @@ If you want the last theme used to be automatically loaded in the future you can
 <ThemeSwitcher defaultTheme="yeti" themePath="/themes" storeThemeKey="theme" />
 ```
 This way, if no theme is currently loaded 'yeti' will be used, but if the user selects another theme it's name will be saved in localStorage under the ```theme``` key and used in the future until it is changed again.
+
+### Theme selection
+By default the ```ThemeChooser``` displays all Bootswatch themes. However, if you only want to use a subset you can specify the theme names via the ```themes``` property of the ```ThemeSwitcher```, for example:
+
+```javascript
+let themes = ['default', 'cerulean', 'darkly'];
+
+render(
+    <Provider store={store}>
+      <ThemeSwitcher defaultTheme='default' storeThemeKey="theme" themes={themes}>
+        <Router history={history} routes={routes} />
+      </ThemeSwitcher>
+    </Provider>, document.getElementById('app')
+);
+```
+Make sure that the themes provided include the ```defaultTheme```, if set, and use the lower case theme names. The ```ThemeChooser``` will capitalize them and show them in alphabetical order.
