@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap-theme-switcher",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A React component to select and switch among Bootstrap (Bootswatch) Themes",
   "main": "index.js",
   "scripts": {

@@ -91,7 +91,7 @@ export default {
   ...  
 ```
 
-You can use the versions provided by the theme switcher from ```node_modules/react-bootstrap-theme-switcher/themes``` or you generate your own files using versions of your choosing. However, the structure and file naming must exactly match what is provided in the distribution. Instructions on downloading/customizing Bootswatch themes can be [found here](https://github.com/thomaspark/bootswatch).
+You can use the versions provided by the theme switcher from ```node_modules/react-bootstrap-theme-switcher/themes``` or you generate your own files using different versions of JQuery or Bootstrap. However, the structure and file naming must exactly match what is provided in the distribution. Instructions on downloading/customizing Bootswatch themes can be [found here](https://github.com/thomaspark/bootswatch).
 
 **NOTE:** If you put them in a directory other than ```/themes``` you can specify the ```themePath``` property of the ```ThemeSwitcher```.
 
