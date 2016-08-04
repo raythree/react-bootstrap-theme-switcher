@@ -21,6 +21,7 @@ The theme switcher works by dynamically modifying the document's stylesheet link
 The ThemeSwitcher will make sure your app is not displayed until the selected theme is loaded, and will also hide it whenever the ThemeChooser selects a new theme. Here is an example of an app that uses the Redux Provider and React Router rendered in index.js:
 
 ```javascript
+import { ThemeSwitcher } from 'react-bootstrap-theme-switcher';
 const store = configureStore();
 const history = syncHistoryWithStore(browserHistory, store);
 
