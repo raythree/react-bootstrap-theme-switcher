@@ -59,18 +59,16 @@ class ThemeSwitcher extends React.Component {
     this.load = this.load.bind(this);
     this.loadDefault = this.loadDefault.bind(this);
 
-    console.log('props themepath: ' + props.themePath)
     this.themePath = props.themePath || '/themes/';
     if (this.themePath.charAt(this.themePath.length - 1) !== '/') {
       this.themePath = this.themePath + '/';
     }
-    this.state = {loaded: false};
+    this.state = {loaded: false, currentTheme: null};
   }
 
   componentDidMount() {
     // load bootstrap javascript just at first mount
     if (!isJsLoaded()) {
-      console.log('LOADING JQUERY via ' + this.themePath);
       Lazyloader.load(this.themePath + 'js/jquery.min.js', function () {
         Lazyloader.load(this.themePath + 'js/bootstrap.min.js', function () {
           this.load(); // load default theme
@@ -82,7 +80,7 @@ class ThemeSwitcher extends React.Component {
   loadDefault() {
     Lazyloader.load(this.themePath + 'default/bootstrap.min.css', function () {
       Lazyloader.load(this.themePath + 'default/bootstrap-theme.min.css', function () {
-        this.setState({loaded: true});
+        this.setState({loaded: true, currentTheme: 'default'});
       }.bind(this));
     }.bind(this));
   }
@@ -105,7 +103,7 @@ class ThemeSwitcher extends React.Component {
 
     Lazyloader.load(this.themePath + name + '/bootstrap.min.css', function () {
       setItem(this.props.storeThemeKey, name);
-      this.setState({loaded: true})
+      this.setState({loaded: true, currentTheme: name})
     }.bind(this));
   }
 
@@ -113,7 +111,8 @@ class ThemeSwitcher extends React.Component {
   getChildContext() {
     return {
       themeSwitcher: this,
-      themes: this.props.themes
+      themes: this.props.themes,
+      currentTheme: this.state.currentTheme
     };
   }
 
@@ -125,7 +124,8 @@ class ThemeSwitcher extends React.Component {
 
 ThemeSwitcher.childContextTypes = {
   themeSwitcher: React.PropTypes.object,
-  themes: React.PropTypes.array
+  themes: React.PropTypes.array,
+  currentTheme: React.PropTypes.string
 };
 
 ThemeSwitcher.propTypes = {

@@ -38,8 +38,7 @@ class ThemeChooser extends React.Component {
       </button>
         <ul className="dropdown-menu">
           {this.themes.map((theme) => {
-            //var active = (theme === currentTheme ? 'active' : '');
-            var active = '';
+            var active = (theme === this.context.currentTheme ? 'active' : '');
             return <li key={theme} className={active}>
               <a href="#" data-theme={theme} onClick={this.onSelect}>{capitalize(theme)}</a>
             </li>
@@ -53,7 +52,8 @@ class ThemeChooser extends React.Component {
 
 ThemeChooser.contextTypes = {
   themeSwitcher: React.PropTypes.object,
-  themes: React.PropTypes.array
+  themes: React.PropTypes.array,
+  currentTheme: React.PropTypes.string
 };
 
 export { ThemeChooser };

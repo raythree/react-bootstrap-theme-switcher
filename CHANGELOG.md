@@ -1,3 +1,7 @@
+### [1.0.6]
+* ThemeChooser dropdown current theme shown as active.
+* Remove console.log
+
 ### [1.0.5]
 * Fixed themePath property.
 
