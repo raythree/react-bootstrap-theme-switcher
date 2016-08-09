@@ -1,4 +1,4 @@
-ÂÂÂ# react-bootstrap-theme-switcher
+#react-bootstrap-theme-switcher
 
 A React component for dynamically switching between Bootstrap and [Bootswatch](https://bootswatch.com/) themes. Two lines of code and copy themes to your Web server.
 
