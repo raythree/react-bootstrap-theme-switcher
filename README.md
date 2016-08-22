@@ -2,7 +2,7 @@
 
 A React component for dynamically switching between Bootstrap and [Bootswatch](https://bootswatch.com/) themes. Two lines of code and copy themes to your Web server.
 
-<img src="theme-switcher.png" />
+<img src="http://demo.ray3.io/theme-switcher.png" />
 
 [A live demo is here](http://demo.ray3.io/theme-switcher)
 
