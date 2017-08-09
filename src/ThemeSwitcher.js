@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Lazyloader from './lazyloader';
 
 function setItem(key, obj) {
@@ -123,16 +124,16 @@ class ThemeSwitcher extends React.Component {
 }
 
 ThemeSwitcher.childContextTypes = {
-  themeSwitcher: React.PropTypes.object,
-  themes: React.PropTypes.array,
-  currentTheme: React.PropTypes.string
+  themeSwitcher: PropTypes.object,
+  themes: PropTypes.array,
+  currentTheme: PropTypes.string
 };
 
 ThemeSwitcher.propTypes = {
-  themePath: React.PropTypes.string,
-  defaultTheme: React.PropTypes.string,
-  storeThemeKey: React.PropTypes.string,
-  themes: React.PropTypes.array
+  themePath: PropTypes.string,
+  defaultTheme: PropTypes.string,
+  storeThemeKey: PropTypes.string,
+  themes: PropTypes.array
 };
 
 ThemeSwitcher.defaultProps = {

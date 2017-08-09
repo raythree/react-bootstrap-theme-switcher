@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function capitalize(s) {
   return s.charAt(0).toUpperCase() + s.substring(1);
@@ -51,9 +52,9 @@ class ThemeChooser extends React.Component {
 }
 
 ThemeChooser.contextTypes = {
-  themeSwitcher: React.PropTypes.object,
-  themes: React.PropTypes.array,
-  currentTheme: React.PropTypes.string
+  themeSwitcher: PropTypes.object,
+  themes: PropTypes.array,
+  currentTheme: PropTypes.string
 };
 
 export { ThemeChooser };
