@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap-theme-switcher",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A React component to select and switch among Bootstrap (Bootswatch) Themes",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/raythree/react-bootstrap-table.git"
+    "url": "https://github.com/raythree/react-bootstrap-theme-switche"
   },
   "keywords": [
     "React",
@@ -20,9 +20,9 @@
   "author": "Bill Walker <bill@ray3.io> (http://ray3.io)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/raythree/react-bootstrap-table/issues"
+    "url": "https://github.com/raythree/react-bootstrap-theme-switche/issues"
   },
-  "homepage": "https://github.com/raythree/react-bootstrap-table#readme",
+  "homepage": "https://github.com/raythree/react-bootstrap-theme-switche#readme",
   "peerDependencies": {
     "react": ">=0.14",
     "bootstrap": "~3.3.7"
