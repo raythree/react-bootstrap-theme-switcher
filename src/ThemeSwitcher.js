@@ -81,6 +81,7 @@ class ThemeSwitcher extends React.Component {
   loadDefault() {
     Lazyloader.load(this.themePath + 'default/bootstrap.min.css', function () {
       Lazyloader.load(this.themePath + 'default/bootstrap-theme.min.css', function () {
+        setItem(this.props.storeThemeKey, 'default');
         this.setState({loaded: true, currentTheme: 'default'});
       }.bind(this));
     }.bind(this));
